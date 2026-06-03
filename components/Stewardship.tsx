@@ -18,10 +18,10 @@ export default function Stewardship() {
         {t.stewardship.title}
       </p>
       <div className="reveal reveal-delay-2" style={{ maxWidth: "560px" }}>
-        <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.48)", letterSpacing: "0.025em", marginBottom: "24px" }}>{t.stewardship.p1}</p>
-        <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.34)", letterSpacing: "0.025em" }}>{t.stewardship.p2}</p>
+        <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.62)", letterSpacing: "0.025em", marginBottom: "24px" }}>{t.stewardship.p1}</p>
+        <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.48)", letterSpacing: "0.025em" }}>{t.stewardship.p2}</p>
       </div>
-      <div className="reveal reveal-delay-3" style={{ marginTop: "72px", width: "1px", height: "60px", background: "rgba(10,10,10,0.1)" }} />
+      <div className="reveal reveal-delay-3" style={{ marginTop: "72px", width: "1px", height: "60px", background: "rgba(10,10,10,0.14)" }} />
       <style>{`@media(max-width:768px){#stewardship{padding:100px 28px!important}}`}</style>
     </section>
   );
