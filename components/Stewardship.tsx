@@ -1,26 +1,21 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { useLang } from "@/lib/LanguageContext";
+'use client'
+import { useLang } from '../lib/LanguageContext'
 
 export default function Stewardship() {
-  const ref = useRef<HTMLElement>(null);
-  const { t } = useLang();
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible")); obs.disconnect(); }}, { threshold: 0.1 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
+  const { t } = useLang()
   return (
-    <section id="stewardship" ref={ref} style={{ padding: "160px 72px", background: "#F7F5F0", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-      <div className="reveal eyebrow dark" style={{ justifyContent: "center" }}>{t.stewardship.eyebrow}</div>
-      <p className="reveal reveal-delay-1" style={{ fontFamily: "'EB Garamond',Georgia,serif", fontSize: "clamp(28px,3.5vw,48px)", fontWeight: 400, lineHeight: 1.35, color: "#0A0A0A", letterSpacing: "-0.01em", marginBottom: "52px", maxWidth: "700px" }}>{t.stewardship.title}</p>
-      <div className="reveal reveal-delay-2" style={{ maxWidth: "560px" }}>
-        <p style={{ fontSize: "15px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.72)", letterSpacing: "0.025em", marginBottom: "24px" }}>{t.stewardship.p1}</p>
-        <p style={{ fontSize: "15px", fontWeight: 300, lineHeight: 2.1, color: "rgba(10,10,10,0.58)", letterSpacing: "0.025em" }}>{t.stewardship.p2}</p>
+    <section className="bg-[#F7F5F0] py-28 md:py-36 px-8 md:px-16 border-t border-black/5">
+      <div className="max-w-4xl mx-auto text-center reveal">
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="w-8 h-px bg-black/15" />
+          <span className="tracking-[0.3em] text-black/25 text-[9px] font-light">{t.stewardship.eyebrow}</span>
+          <div className="w-8 h-px bg-black/15" />
+        </div>
+        <p className="font-light text-black/70 leading-relaxed mb-8" style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontFamily: "'EB Garamond', serif" }}>
+          "{t.stewardship.statement}"
+        </p>
+        <p className="tracking-[0.4em] text-black/25 text-[10px] font-light">{t.stewardship.sub.toUpperCase()}</p>
       </div>
-      <div className="reveal reveal-delay-3" style={{ marginTop: "72px", width: "1px", height: "60px", background: "rgba(10,10,10,0.18)" }} />
-      <style>{`@media(max-width:768px){#stewardship{padding:100px 28px!important}}`}</style>
     </section>
-  );
+  )
 }

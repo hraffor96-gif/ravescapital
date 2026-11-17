@@ -1,36 +1,31 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { useLang } from "@/lib/LanguageContext";
+'use client'
+import { useLang } from '../lib/LanguageContext'
 
 export default function RiskReturn() {
-  const ref = useRef<HTMLElement>(null);
-  const { t } = useLang();
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible")); obs.disconnect(); }}, { threshold: 0.08 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
+  const { t } = useLang()
   return (
-    <section ref={ref} style={{ padding: "140px 72px", background: "#111111" }}>
-      <div className="reveal eyebrow">{t.riskReturn.eyebrow}</div>
-      <h2 className="reveal reveal-delay-1 display" style={{ color: "#F7F5F0", marginBottom: "80px" }}>{t.riskReturn.title[0]}<br />{t.riskReturn.title[1]}</h2>
-      <div className="reveal reveal-delay-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "100px", alignItems: "start" }} id="risk-grid">
-        <div>
-          <p style={{ fontFamily: "'EB Garamond',Georgia,serif", fontSize: "clamp(20px,1.9vw,27px)", fontWeight: 400, fontStyle: "italic", lineHeight: 1.65, color: "rgba(247,245,240,0.78)", marginBottom: "36px" }}>"{t.riskReturn.quote}"</p>
-          <p style={{ fontSize: "13.5px", fontWeight: 300, lineHeight: 2, color: "rgba(247,245,240,0.62)", letterSpacing: "0.025em" }}>{t.riskReturn.body}</p>
+    <section className="bg-[#111111] py-28 md:py-36 px-8 md:px-16 border-t border-white/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16 reveal">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-8 h-px bg-white/20" />
+            <span className="tracking-[0.3em] text-white/30 text-[9px] font-light">{t.riskReturn.eyebrow}</span>
+          </div>
+          <blockquote className="font-light text-white/80 mb-4" style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontFamily: "'EB Garamond', serif" }}>
+            {t.riskReturn.quote}
+          </blockquote>
+          <p className="text-white/35 font-light text-sm max-w-xl leading-relaxed">{t.riskReturn.quoteBody}</p>
         </div>
-        <div>
-          <div style={{ fontSize: "8.5px", letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(247,245,240,0.52)", marginBottom: "32px" }}>{t.riskReturn.criteriaLabel}</div>
-          {t.riskReturn.criteria.map(f => (
-            <div key={f.label} style={{ padding: "24px 0", borderTop: "1px solid rgba(247,245,240,0.10)" }}>
-              <div style={{ fontSize: "9.5px", fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(247,245,240,0.72)", marginBottom: "10px" }}>{f.label}</div>
-              <p style={{ fontSize: "13px", fontWeight: 300, lineHeight: 1.85, color: "rgba(247,245,240,0.55)", letterSpacing: "0.02em" }}>{f.body}</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+          {t.riskReturn.criteria.map((c, i) => (
+            <div key={i} className="border-t border-white/5 py-8 pr-8 reveal" style={{ animationDelay: `${i * 0.07}s` }}>
+              <p className="text-white/60 font-light text-base mb-2" style={{ fontFamily: "'EB Garamond', serif" }}>{c.label}</p>
+              <p className="text-white/25 font-light text-sm leading-relaxed">{c.desc}</p>
             </div>
           ))}
         </div>
       </div>
-      <style>{`@media(max-width:900px){section[style*="#111111"]{padding:100px 28px!important}#risk-grid{grid-template-columns:1fr!important;gap:60px!important}}`}</style>
     </section>
-  );
+  )
 }

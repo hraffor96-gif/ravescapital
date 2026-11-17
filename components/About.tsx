@@ -1,32 +1,37 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { useLang } from "@/lib/LanguageContext";
+'use client'
+import { useLang } from '../lib/LanguageContext'
 
 export default function About() {
-  const ref = useRef<HTMLElement>(null);
-  const { t } = useLang();
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible")); obs.disconnect(); }}, { threshold: 0.1 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
+  const { t } = useLang()
   return (
-    <section id="about" ref={ref} style={{ padding: "140px 72px", background: "#0A0A0A" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "100px", alignItems: "start" }} className="two-col">
-        <div>
-          <div className="reveal eyebrow">{t.about.eyebrow}</div>
-          <h2 className="reveal reveal-delay-1 display" style={{ color: "#F7F5F0" }}>
-            {t.about.title[0]}<br />{t.about.title[1]}<br />
-            <em style={{ fontStyle: "italic", color: "rgba(247,245,240,0.55)" }}>{t.about.title[2]}</em>
-          </h2>
-        </div>
-        <div style={{ borderLeft: "1px solid rgba(247,245,240,0.10)", paddingLeft: "80px" }} className="about-right">
-          <p className="reveal reveal-delay-1 body-text" style={{ color: "rgba(247,245,240,0.82)", marginBottom: "36px" }}>{t.about.p1}</p>
-          <p className="reveal reveal-delay-2 body-text" style={{ color: "rgba(247,245,240,0.62)" }}>{t.about.p2}</p>
+    <section id="about" className="bg-[#0A0A0A] py-28 md:py-36 px-8 md:px-16 border-t border-white/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          {/* Left */}
+          <div className="reveal">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-8 h-px bg-white/20" />
+              <span className="tracking-[0.3em] text-white/30 text-[9px] font-light">{t.about.eyebrow}</span>
+            </div>
+            <h2 className="font-light leading-tight text-white" style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontFamily: "'EB Garamond', serif" }}>
+              {t.about.headline.split('\n').map((line, i) => (
+                <span key={i}>
+                  {i === 1 ? <em className="text-white/40 not-italic">{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
+            </h2>
+          </div>
+
+          {/* Right */}
+          <div className="reveal" style={{ animationDelay: '0.15s' }}>
+            <div className="w-px h-full bg-white/5 hidden lg:block absolute left-1/2" />
+            <p className="text-white/60 font-light leading-relaxed text-base mb-6">{t.about.body1}</p>
+            <p className="text-white/40 font-light leading-relaxed text-sm mb-6">{t.about.body2}</p>
+            <p className="text-white/30 font-light leading-relaxed text-sm italic" style={{ fontFamily: "'EB Garamond', serif" }}>{t.about.body3}</p>
+          </div>
         </div>
       </div>
-      <style>{`@media(max-width:900px){#about{padding:100px 28px!important}#about .two-col{grid-template-columns:1fr!important;gap:48px!important}.about-right{border-left:none!important;border-top:1px solid rgba(247,245,240,0.10);padding-left:0!important;padding-top:36px!important}}`}</style>
     </section>
-  );
+  )
 }

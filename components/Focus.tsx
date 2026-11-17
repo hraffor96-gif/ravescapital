@@ -1,35 +1,37 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { useLang } from "@/lib/LanguageContext";
+'use client'
+import { useLang } from '../lib/LanguageContext'
 
 export default function Focus() {
-  const ref = useRef<HTMLElement>(null);
-  const { t } = useLang();
-  useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible")); obs.disconnect(); }}, { threshold: 0.08 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
+  const { t } = useLang()
   return (
-    <section id="focus" ref={ref} style={{ padding: "140px 72px", background: "#F7F5F0" }}>
-      <div className="reveal eyebrow dark">{t.focus.eyebrow}</div>
-      <h2 className="reveal reveal-delay-1 display" style={{ color: "#0A0A0A", marginBottom: "20px" }}>{t.focus.title}</h2>
-      <p className="reveal reveal-delay-2 body-text" style={{ color: "rgba(10,10,10,0.62)", maxWidth: "440px", marginBottom: "72px" }}>{t.focus.body}</p>
-      <div className="reveal reveal-delay-2" style={{ borderTop: "1px solid rgba(10,10,10,0.12)" }}>
-        {t.focus.items.map((a) => (
-          <div key={a.num}
-            style={{ display: "grid", gridTemplateColumns: "80px 1fr auto", alignItems: "center", padding: "36px 0", borderBottom: "1px solid rgba(10,10,10,0.1)", transition: "opacity 0.35s", cursor: "default" }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.55")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-          >
-            <div style={{ fontFamily: "'EB Garamond',serif", fontSize: "12px", color: "rgba(10,10,10,0.35)", letterSpacing: "0.08em" }}>{a.num}</div>
-            <div style={{ fontFamily: "'EB Garamond',serif", fontSize: "clamp(22px,2.2vw,30px)", fontWeight: 400, color: "#0A0A0A" }}>{a.title}</div>
-            <div style={{ fontSize: "11px", fontWeight: 300, color: "rgba(10,10,10,0.52)", letterSpacing: "0.03em", textAlign: "right" }} className="focus-sub">{a.sub}</div>
+    <section id="investments" className="bg-[#111111] py-28 md:py-36 px-8 md:px-16 border-t border-white/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-16 reveal">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-8 h-px bg-white/20" />
+            <span className="tracking-[0.3em] text-white/30 text-[9px] font-light">{t.focus.eyebrow}</span>
           </div>
-        ))}
+          <h2 className="font-light text-white" style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', fontFamily: "'EB Garamond', serif" }}>
+            {t.focus.headline}
+          </h2>
+        </div>
+
+        <div className="space-y-0">
+          {t.focus.items.map((item, i) => (
+            <div key={i} className="border-t border-white/5 py-8 grid grid-cols-1 md:grid-cols-[80px_200px_1fr] gap-4 md:gap-8 items-start reveal group hover:border-white/10 transition-colors" style={{ animationDelay: `${i * 0.08}s` }}>
+              <span className="text-white/15 text-xs tracking-[0.2em] font-light pt-1">{item.num}</span>
+              <div>
+                <p className="text-white/80 font-light text-lg mb-1" style={{ fontFamily: "'EB Garamond', serif" }}>{item.title}</p>
+                <p className="text-white/25 text-[10px] tracking-[0.2em] font-light">{item.subtitle}</p>
+              </div>
+              <p className="text-white/35 font-light text-sm leading-relaxed">{item.body}</p>
+            </div>
+          ))}
+          <div className="border-t border-white/5" />
+        </div>
+
+        <p className="mt-8 text-white/15 text-[10px] tracking-[0.1em] font-light reveal">{t.focus.note}</p>
       </div>
-      <style>{`@media(max-width:768px){#focus{padding:100px 28px!important}.focus-sub{display:none!important}}`}</style>
     </section>
-  );
+  )
 }

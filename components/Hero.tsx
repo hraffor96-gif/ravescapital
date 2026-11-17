@@ -1,72 +1,96 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useLang } from "@/lib/LanguageContext";
-import Logo from "./Logo";
-
-const anim = (loaded: boolean, delay: number): React.CSSProperties => ({
-  opacity: loaded ? 1 : 0,
-  transform: loaded ? "none" : "translateY(20px)",
-  transition: "opacity 1.4s cubic-bezier(0.16,1,0.3,1), transform 1.4s cubic-bezier(0.16,1,0.3,1)",
-  transitionDelay: `${delay}s`,
-});
+'use client'
+import { useLang } from '../lib/LanguageContext'
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false);
-  const { t } = useLang();
-  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  useEffect(() => { const timer = setTimeout(() => setLoaded(true), 1900); return () => clearTimeout(timer); }, []);
+  const { t } = useLang()
+
+  const handleScroll = (href: string) => {
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <section style={{ minHeight: "100vh", background: "#0A0A0A", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "0 72px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: "72px", top: 0, bottom: 0, width: "1px", background: "rgba(247,245,240,0.05)" }} className="v-rule" />
-      <div style={{ position: "absolute", right: "72px", top: 0, bottom: 0, width: "1px", background: "rgba(247,245,240,0.05)" }} className="v-rule" />
-      <div style={{ height: "120px" }} />
+    <section id="home" className="relative min-h-screen bg-[#0A0A0A] flex flex-col">
+      {/* Subtle grid texture */}
+      <div className="absolute inset-0 opacity-[0.03]"
+        style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", paddingBottom: "60px" }}>
-        <div style={anim(loaded, 0.1)}>
-          <div style={{ fontSize: "8.5px", fontWeight: 500, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(247,245,240,0.62)", marginBottom: "52px" }}>
-            {t.hero.eyebrow}
+      {/* Left border line */}
+      <div className="absolute left-8 md:left-12 top-0 bottom-0 w-px bg-white/5" />
+
+      {/* Content */}
+      <div className="relative flex-1 flex flex-col px-8 md:px-16 pt-32 pb-24">
+        {/* Eyebrow */}
+        <p className="tracking-[0.4em] text-white/30 text-[10px] font-light mb-16 reveal">
+          {t.hero.eyebrow}
+        </p>
+
+        {/* Main layout */}
+        <div className="flex-1 flex flex-col lg:flex-row lg:items-end">
+          {/* Left: logo + content */}
+          <div className="flex-1 flex flex-col justify-end">
+            {/* Logo mark */}
+            <div className="mb-10 reveal" style={{ animationDelay: '0.1s' }}>
+              <div className="relative inline-block">
+                <span className="block text-white font-light leading-none tracking-[0.08em]"
+                  style={{ fontSize: 'clamp(52px, 8vw, 96px)', fontFamily: 'Inter, sans-serif' }}>
+                  RAVES
+                </span>
+                <div className="h-px bg-white/20 my-2" />
+                <span className="block text-white/40 font-light tracking-[0.5em] text-sm">
+                  C A P I T A L
+                </span>
+              </div>
+            </div>
+
+            {/* Tagline */}
+            <div className="mb-6 reveal" style={{ animationDelay: '0.2s' }}>
+              {t.hero.tagline.split('\n').map((line, i) => (
+                <p key={i} className={`font-light leading-tight ${i === 0 ? 'text-white' : 'text-white/50 italic'}`}
+                  style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', fontFamily: "'EB Garamond', serif" }}>
+                  {line}
+                </p>
+              ))}
+            </div>
+
+            {/* Body */}
+            <p className="text-white/40 font-light leading-relaxed max-w-md mb-10 text-sm reveal" style={{ animationDelay: '0.3s' }}>
+              {t.hero.body}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 reveal" style={{ animationDelay: '0.4s' }}>
+              <button onClick={() => handleScroll('#approach')}
+                className="border border-white/30 hover:border-white/60 text-white/70 hover:text-white tracking-[0.2em] text-[10px] font-light px-8 py-3.5 transition-all duration-300 hover:bg-white/5">
+                {t.hero.cta1}
+              </button>
+              <button onClick={() => handleScroll('#contact')}
+                className="text-white/30 hover:text-white/70 tracking-[0.2em] text-[10px] font-light px-4 py-3.5 transition-colors duration-300">
+                {t.hero.cta2}
+              </button>
+            </div>
+          </div>
+
+          {/* Right: aside stats */}
+          <div className="hidden lg:flex flex-col gap-10 pb-2 pl-20 reveal" style={{ animationDelay: '0.5s' }}>
+            {t.hero.aside.map((item, i) => (
+              <div key={i} className="text-right">
+                <p className="tracking-[0.3em] text-white/20 text-[9px] font-light mb-1">{item.label}</p>
+                <p className="text-white/50 font-light text-3xl" style={{ fontFamily: "'EB Garamond', serif" }}>{item.value}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div style={{ ...anim(loaded, 0.25), marginBottom: "52px" }}>
-          <Logo variant="primary" height={88} />
-        </div>
-
-        <div style={{ ...anim(loaded, 0.45), maxWidth: "420px" }}>
-          <p style={{ fontFamily: "'EB Garamond',Georgia,serif", fontSize: "clamp(18px,1.7vw,22px)", fontWeight: 400, fontStyle: "italic", color: "rgba(247,245,240,0.75)", lineHeight: 1.6, marginBottom: "24px" }}>
-            {t.hero.tagline}
-          </p>
-          <p style={{ fontSize: "14px", fontWeight: 300, lineHeight: 2, color: "rgba(247,245,240,0.65)", letterSpacing: "0.03em", marginBottom: "52px" }}>
-            {t.hero.body}
-          </p>
-          <button onClick={() => scrollTo("contact")}
-            style={{ display: "inline-flex", alignItems: "center", gap: "16px", padding: "15px 44px", border: "1px solid rgba(247,245,240,0.35)", background: "transparent", fontFamily: "'Inter',sans-serif", fontSize: "9px", fontWeight: 500, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(247,245,240,0.82)", cursor: "pointer", transition: "all 0.45s" }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = "#F7F5F0"; e.currentTarget.style.color = "#F7F5F0"; e.currentTarget.style.background = "rgba(247,245,240,0.05)"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(247,245,240,0.35)"; e.currentTarget.style.color = "rgba(247,245,240,0.82)"; e.currentTarget.style.background = "transparent"; }}
-          >{t.hero.cta} →</button>
+        {/* Trust bar */}
+        <div className="mt-16 pt-6 border-t border-white/5 reveal" style={{ animationDelay: '0.6s' }}>
+          <div className="flex flex-wrap gap-x-10 gap-y-3">
+            {t.hero.trustBar.map((item, i) => (
+              <span key={i} className="tracking-[0.3em] text-white/20 text-[9px] font-light">{item}</span>
+            ))}
+          </div>
         </div>
       </div>
-
-      <div style={{ ...anim(loaded, 0.6), position: "absolute", right: "72px", bottom: "100px", textAlign: "right" }} className="hero-aside">
-        {t.hero.aside.map(s => (
-          <div key={s.label} style={{ marginBottom: "32px" }}>
-            <div style={{ fontSize: "8px", letterSpacing: "0.32em", textTransform: "uppercase", color: "rgba(247,245,240,0.52)", marginBottom: "6px" }}>{s.label}</div>
-            <div style={{ fontFamily: "'EB Garamond',serif", fontSize: "26px", fontWeight: 400, color: "rgba(247,245,240,0.58)" }}>{s.val}</div>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ ...anim(loaded, 0.75), borderTop: "1px solid rgba(247,245,240,0.10)", padding: "28px 0", display: "flex", alignItems: "center", flexWrap: "wrap", gap: "4px" }}>
-        {t.hero.signals.map((s, i) => (
-          <div key={s} style={{ display: "flex", alignItems: "center" }}>
-            {i > 0 && <span style={{ color: "rgba(247,245,240,0.25)", fontSize: "10px", margin: "0 18px" }}>·</span>}
-            <span style={{ fontSize: "8.5px", fontWeight: 400, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(247,245,240,0.55)" }}>{s}</span>
-          </div>
-        ))}
-      </div>
-
-      <style>{`@media(max-width:768px){section[style*="minHeight"]{padding:0 28px!important}.v-rule,.hero-aside{display:none!important}}`}</style>
     </section>
-  );
+  )
 }
