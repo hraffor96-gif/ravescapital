@@ -19,7 +19,8 @@ export default function Navbar() {
     { href: '#investments', label: t.nav.investments },
     { href: '#approach', label: t.nav.approach },
     { href: '#philosophy', label: t.nav.philosophy },
-    { href: '#partners', label: t.nav.partners },
+    { href: '#investor-relations', label: t.nav.relations },
+    { href: '#strategic-partnerships', label: t.nav.partnerships },
     { href: '#contact', label: t.nav.contact },
   ]
 
@@ -40,10 +41,10 @@ export default function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {links.map(l => (
             <a key={l.href} href={l.href} onClick={(e) => handleScroll(e, l.href)}
-              className="text-white/40 hover:text-white/90 tracking-[0.2em] text-[10px] font-light transition-colors duration-300">
+              className="text-white/40 hover:text-white/90 tracking-[0.15em] xl:tracking-[0.2em] text-[9px] xl:text-[10px] font-light transition-colors duration-300 whitespace-nowrap">
               {l.label}
             </a>
           ))}

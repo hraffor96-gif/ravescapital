@@ -7,7 +7,9 @@ import Focus from '../components/Focus'
 import Approach from '../components/Approach'
 import Philosophy from '../components/Philosophy'
 import RiskReturn from '../components/RiskReturn'
-import Partners from '../components/Partners'
+import InvestorRelations from '../components/InvestorRelations'
+import StrategicPartnerships from '../components/StrategicPartnerships'
+import Leadership from '../components/Leadership'
 import WhyRaves from '../components/WhyRaves'
 import Stewardship from '../components/Stewardship'
 import Contact from '../components/Contact'
@@ -25,7 +27,9 @@ export default function Home() {
         <Approach />
         <Philosophy />
         <RiskReturn />
-        <Partners />
+        <InvestorRelations />
+        <StrategicPartnerships />
+        <Leadership />
         <WhyRaves />
         <Stewardship />
         <Contact />
