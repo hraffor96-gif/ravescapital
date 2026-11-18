@@ -33,11 +33,11 @@ export default function Hero() {
             <div className="mb-10 reveal" style={{ animationDelay: '0.1s' }}>
               <div className="relative inline-block">
                 <span className="block font-light leading-none tracking-[0.08em]"
-                  style={{ fontSize: 'clamp(52px, 8vw, 96px)', fontFamily: 'Inter, sans-serif', color: 'var(--text-primary)' }}>
+                  style={{ fontSize: 'clamp(52px, 8vw, 96px)', fontFamily: 'Inter, sans-serif', color: 'var(--text-brand)' }}>
                   RAVES
                 </span>
-                <div className="h-px my-2" style={{ background: 'rgba(255,255,255,0.28)' }} />
-                <span className="block font-light tracking-[0.5em] text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <div className="h-px my-2" style={{ background: 'var(--border)' }} />
+                <span className="block font-light tracking-[0.5em] text-sm" style={{ color: 'var(--text-muted)' }}>
                   C A P I T A L
                 </span>
               </div>
@@ -50,7 +50,7 @@ export default function Hero() {
                   style={{
                     fontSize: 'clamp(20px, 2.5vw, 28px)',
                     fontFamily: "'EB Garamond', serif",
-                    color: i === 0 ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    color: i === 0 ? 'var(--text-primary)' : 'var(--text-muted)',
                     fontStyle: i === 1 ? 'italic' : 'normal',
                   }}>
                   {line}

@@ -46,9 +46,9 @@ export default function Navbar() {
         {/* Logo */}
         <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           className="tracking-[0.3em] text-xs font-light transition-colors duration-300"
-          style={{ color: 'var(--text-body)' }}
-          onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-body)')}>
+          style={{ color: 'var(--text-brand)' }}
+          onMouseEnter={e => (e.currentTarget.style.color = '#F0EDE6')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-brand)')}>
           RAVES CAPITAL
         </a>
 

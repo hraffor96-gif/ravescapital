@@ -10,16 +10,19 @@
   --bg-navy: #0D1B2A;
   --bg-paper: #F7F5F0;
 
-  /* Contrast-safe text tokens */
-  --text-primary:   #F2F2F0;        /* headings — ratio ~18:1 */
-  --text-body:      #C8CDD2;        /* body copy — ratio ~9:1 */
-  --text-secondary: #A8B0B8;        /* secondary — ratio ~6:1 */
-  --text-muted:     #7A8694;        /* captions, eyebrows — ratio ~4.5:1 */
-  --text-subtle:    #5C6878;        /* decorative only, never body */
+  /* Refined institutional palette — v5 */
+  --text-primary:   #D8D8D3;        /* headlines — ivory, not pure white — ratio ~14:1 */
+  --text-body:      #A6ADB4;        /* body copy — silver-gray — ratio ~7:1 */
+  --text-secondary: #87919B;        /* secondary text — ratio ~5:1 */
+  --text-muted:     #737E89;        /* labels, eyebrows — ratio ~4.5:1 */
+  --text-subtle:    #566070;        /* decorative only */
 
-  --accent:         #B69A68;        /* champagne gold */
-  --border:         #2A3542;        /* visible borders */
-  --border-light:   #1E2A36;        /* subtle dividers */
+  /* Brand wordmark — warmer ivory, slightly elevated */
+  --text-brand:     #E2E0DA;
+
+  --accent:         #A9916C;        /* champagne, restrained */
+  --border:         #28323B;        /* visible borders */
+  --border-light:   #1A2530;        /* subtle dividers */
 }
 
 * { box-sizing: border-box; }
@@ -37,7 +40,7 @@ body {
 
 /* ── Global text overrides ─────────────────────────────────────────── */
 
-/* Force readable defaults on the most-used low-opacity patterns */
+/* Refined opacity-to-token mapping — v5 */
 .text-white\/15, .text-white\/20 { color: var(--text-muted) !important; }
 .text-white\/25, .text-white\/30 { color: var(--text-muted) !important; }
 .text-white\/35, .text-white\/40 { color: var(--text-secondary) !important; }
@@ -45,6 +48,8 @@ body {
 .text-white\/55, .text-white\/60 { color: var(--text-body) !important; }
 .text-white\/70, .text-white\/80 { color: var(--text-primary) !important; }
 .text-white\/90, .text-white\/96 { color: var(--text-primary) !important; }
+/* Pure white — only allowed as explicit override, never default */
+.text-white { color: var(--text-primary) !important; }
 
 /* Nav links — override to ensure readability */
 nav a, nav button { color: var(--text-secondary) !important; }

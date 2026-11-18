@@ -16,11 +16,11 @@ export default function Loader() {
   return (
     <div className={`fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center transition-opacity duration-600 ${fading ? 'opacity-0' : 'opacity-100'}`}>
       <div className="flex flex-col items-center gap-3">
-        <span className="tracking-[0.5em] text-white/80 text-sm font-light" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <span className="tracking-[0.5em] text-sm font-light" style={{ fontFamily: 'Inter, sans-serif', color: '#D8D8D3' }}>
           RAVES
         </span>
-        <div className="w-16 h-px bg-white/20 origin-left animate-[expand_0.8s_ease-out_0.3s_forwards] scale-x-0" />
-        <span className="tracking-[0.4em] text-white/30 text-[9px] font-light" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <div className="w-16 h-px origin-left animate-[expand_0.8s_ease-out_0.3s_forwards] scale-x-0" style={{ background: '#28323B' }} />
+        <span className="tracking-[0.4em] text-[9px] font-light" style={{ fontFamily: 'Inter, sans-serif', color: '#737E89' }}>
           CAPITAL
         </span>
       </div>
